@@ -22,9 +22,10 @@
 
         <div class="search">
 
-            <input id="search" type="text" name="search_bar" placeholder="search" method="_POST">
-            <button class="uiverse" type="submit" name="submit">
-                <div class="wrapper">
+        <input type="text" id="searchInput" placeholder="Entrez le titre du livre ou le nom de la catégorie" class="input-dark red">      
+       
+        <div class="wrapper">
+        <button onclick="searchBooks()" class="uiverse">
                     <span>Rechercher</span>
                     <div class="circle circle-12"></div>
                     <div class="circle circle-11"></div>
@@ -41,13 +42,24 @@
                 </div>
             </button>
             
-            <select name="cars" id="categories">
-                <option value="none"></option>
-                <option value="fantasy">Fantasy</option>
-                <option value="saab">Science-Fiction</option>
-                <option value="mercedes">Romance</option>
-                <option value="audi">Cuisine</option>
+            
+            <select id="categorySelect" class="input-dark blue">
+                <option value="">Toutes catégories</option>
+                <option value="fiction">Fiction</option>
+                <option value="history">Histoire</option>
+                <option value="technology">Technologie</option>
+                <option value="art">Art</option>
+                <option value="science">Science</option>
+                <option value="religion">Religion</option>
+                <option value="travel">Voyages</option>
+                <option value="cooking">Cuisine</option>
+                <option value="children">Jeunesse</option>
             </select>
+ 
+        </div>
+ 
+        <div id="results" class="results-grid">
+
         </div>
     </div>
 
