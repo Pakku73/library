@@ -8,7 +8,7 @@ function searchRequest() {
         url += `intitle:${search}`;
     }
 
-    if (category) {
+    if (categories) {
         url += `+subject:${categories}`;
     }
  
@@ -21,7 +21,6 @@ function searchRequest() {
             console.error("Erreur lors de la recherche :", error);
         });
 }
-
 
 function displayResults(data) {
     const resultsDiv = document.getElementById("results");
@@ -40,7 +39,6 @@ function displayResults(data) {
                 <img src="${thumbnail}" alt="${title}" style="width: 128px; height: 196px;">
                 <p>Auteur(s): ${authors}</p>
                 <p>Catégorie(s): ${categories}</p>
-               
             `;
  
             resultsDiv.appendChild(bookDiv);
@@ -50,57 +48,61 @@ function displayResults(data) {
     }
 }
 
-const searchBtn = document.querySelector('.uiverse')
+const searchBtn = document.querySelector('.uiverse');
+
+searchBtn.addEventListener('click', searchRequest);
 
 
 
 
 
 
-// const urlApi = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-// fetch(urlApi)
-//   .then(response => {
+const urlApi = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-//     if (!response.ok) {
-//       throw new Error('Network response was not ok');
-//     }
-//     return response.json();
-//   })
-//   .then(data => {
-//     console.log(data);
-//   })
-//   .catch(error => {
-//     console.error('There was a problem with the fetch operation:', error);
-//   });
+fetch(urlApi)
+  .then(response => {
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
 
 
-// function searchBooks(query) {
+function searchBooks(query) {
 
-//     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
   
 
-//     fetch(apiUrl)
-//       .then(response => {
+    fetch(apiUrl)
+      .then(response => {
 
-//         if (!response.ok) {
-//           throw new Error('Network response was not ok');
-//         }
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
-//         return response.json();
-//       })
-//       .then(data => {
+        return response.json();
+      })
+      .then(data => {
 
-//         displayBooks(data.items);
-//       })
-//       .catch(error => {
-//         console.error('There was a problem with the fetch operation:', error);""
-//       });
-//   }
+        displayBooks(data.items);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);""
+      });
+  }
   
 
-//   function displayBooks(books) {
-//     console.log(books);
-//   }
+  function displayBooks(books) {
+    console.log(books);
+  }
 
-//   searchBooks("javascript");
+  searchBooks("javascript");
+
