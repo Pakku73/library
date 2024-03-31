@@ -1,6 +1,13 @@
+const searchInput = document.getElementById("search");
+const categoriesInput = document.getElementById("categories");
+const resultsDiv = document.getElementById("results");
+
+searchInput.addEventListener("input", searchRequest);
+categoriesInput.addEventListener("input", searchRequest);
+
 function searchRequest() {
-    const search = document.getElementById("search").value;
-    const categories = document.getElementById("categories").value;
+    const search = searchInput.value;
+    const categories = categoriesInput.value;
  
     let url = `https://www.googleapis.com/books/v1/volumes?q=`;
  
@@ -13,7 +20,12 @@ function searchRequest() {
     }
  
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la recherche');
+            }
+            return response.json();
+        })
         .then(data => {
             displayResults(data);
         })
@@ -23,7 +35,6 @@ function searchRequest() {
 }
 
 function displayResults(data) {
-    const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
  
     if (data.items && data.items.length > 0) {
@@ -47,62 +58,3 @@ function displayResults(data) {
         resultsDiv.innerHTML = "<p>Aucun livre trouvé.</p>";
     }
 }
-
-const searchBtn = document.querySelector('.uiverse');
-
-searchBtn.addEventListener('click', searchRequest);
-
-
-
-
-
-
-
-const urlApi = 'https://www.googleapis.com/books/v1/volumes?q=';
-
-fetch(urlApi)
-  .then(response => {
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
-
-
-function searchBooks(query) {
-
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
-  
-
-    fetch(apiUrl)
-      .then(response => {
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        return response.json();
-      })
-      .then(data => {
-
-        displayBooks(data.items);
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);""
-      });
-  }
-  
-
-  function displayBooks(books) {
-    console.log(books);
-  }
-
-  searchBooks("javascript");
-
