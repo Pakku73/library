@@ -22,7 +22,7 @@
 
         <div class="search">
 
-        <input type="text" id="searchInput" placeholder="Entrez le titre du livre ou le nom de la catégorie" class="input-dark red">      
+        <input type="text" id="searchInput" placeholder="Entrez le titre du livre" class="input-dark red">      
        
         <div class="wrapper">
         <button onclick="searchBooks()" class="uiverse">
@@ -61,10 +61,6 @@
         <div id="results" class="results-grid">
 
         </div>
-    </div>
-
-    <div class="container third">
-        <div class="results"></div>
     </div>
 
 </body>
